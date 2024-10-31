@@ -23,10 +23,11 @@ const App = () => {
   return (
     <div className="App">
       <div className='photo-list'>
-        {photos.map(() => {
-          <PhotoListItem key={sampleDataForPhotoListItem.id} photo={sampleDataForPhotoListItem}/>
-        })}        
+        {photos.map((_,index) => 
+          <PhotoListItem key={index} photo={sampleDataForPhotoListItem}/>
+        )}        
       </div>
+      <PhotoListItem photo={sampleDataForPhotoListItem}/>
     </div>
   );
 };
