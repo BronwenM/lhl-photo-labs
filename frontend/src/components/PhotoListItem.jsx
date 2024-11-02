@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
+import { ShowModalContext } from "App";
 
 const PhotoListItem = (props) => {
   const {
@@ -10,8 +11,10 @@ const PhotoListItem = (props) => {
     user: {username, name, profile}
   } = props.photo;
 
+  const setShowModal = useContext(ShowModalContext);
+
   return (
-    <div className="photo-list__item">
+    <div className="photo-list__item" onClick={() => setShowModal(prev => !prev)}>
       <PhotoFavButton photoId={id}/>
       <img src={regular} alt="image" className="photo-list__image" />
       <div className="photo-list__user-details">
