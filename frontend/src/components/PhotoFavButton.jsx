@@ -6,7 +6,7 @@ import { FavouritePhotosContext } from 'App';
 function PhotoFavButton(props) {
   const [favouritePhoto, setFavouritePhoto] = useState(false);
 
-  const addFavourite = useContext(FavouritePhotosContext);
+  const {addFavourite} = useContext(FavouritePhotosContext);
   // console.log(addFavourite);
 
   const handleClick = () => {

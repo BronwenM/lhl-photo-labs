@@ -17,7 +17,7 @@ const App = () => {
 
   
   return (
-    <FavouritePhotosContext.Provider value={addFavourite}>
+    <FavouritePhotosContext.Provider value={{favouritePhotos, addFavourite}}>
       <div className="App">
         <HomeRoute photos={photos} topics={topics}  />
       </div>
