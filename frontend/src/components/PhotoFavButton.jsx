@@ -1,12 +1,16 @@
-import React, { useCallback, useState } from 'react';
-
+import React, { useState, useContext } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
+import { FavouritePhotosContext } from 'App';
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
   const [favouritePhoto, setFavouritePhoto] = useState(false);
 
+  const addFavourite = useContext(FavouritePhotosContext);
+  // console.log(addFavourite);
+
   const handleClick = () => {
+    addFavourite(props.photoId);
     setFavouritePhoto(prev => !prev)
   }
 
