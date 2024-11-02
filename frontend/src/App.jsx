@@ -4,6 +4,7 @@ import HomeRoute from "routes/HomeRoute";
 import photos from "mocks/photos";
 import topics from "mocks/topics";
 import { useState, createContext } from "react";
+import PhotoDetailsModal from "routes/PhotoDetailsModal";
 export const FavouritePhotosContext = createContext();
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
     <FavouritePhotosContext.Provider value={{favouritePhotos, addFavourite}}>
       <div className="App">
         <HomeRoute photos={photos} topics={topics}  />
+        <PhotoDetailsModal />
       </div>
     </FavouritePhotosContext.Provider>
   );
