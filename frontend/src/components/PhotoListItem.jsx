@@ -11,10 +11,10 @@ const PhotoListItem = (props) => {
     user: {username, name, profile}
   } = props.photo;
 
-  const setShowModal = useContext(ShowModalContext);
+  const {setShowModal, setModalData} = useContext(ShowModalContext);
 
   return (
-    <div className="photo-list__item" onClick={() => setShowModal(prev => !prev)}>
+    <div className="photo-list__item" onClick={() => {setShowModal(prev => !prev); setModalData({...props.photo})}}>
       <PhotoFavButton photoId={id}/>
       <img src={regular} alt="image" className="photo-list__image" />
       <div className="photo-list__user-details">

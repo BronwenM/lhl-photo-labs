@@ -11,6 +11,7 @@ export const ShowModalContext = createContext();
 const App = () => {
   const [favouritePhotos, setFavouritePhotos] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   const addFavourite = (photoID) => {
     const targetPhoto = photos.find(photo => photo.id === photoID);
@@ -18,11 +19,9 @@ const App = () => {
     favouritePhotos.find(photo => photo.id === photoID) ? setFavouritePhotos(favouritePhotos.filter(photo => photo.id !== photoID)) : setFavouritePhotos(prev => [...prev, targetPhoto]);
   }
 
-  
-  
   return (
     <FavouritePhotosContext.Provider value={{favouritePhotos, addFavourite}}>
-      <ShowModalContext.Provider value={setShowModal}>
+      <ShowModalContext.Provider value={{setShowModal, setModalData, modalData}}>
         <div className="App">
           <HomeRoute photos={photos} topics={topics}  />
           {showModal && <PhotoDetailsModal />}
