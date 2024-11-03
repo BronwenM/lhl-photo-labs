@@ -13,17 +13,17 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
 
-  const addFavourite = (photoID) => {
+  const toggleFavourite = (photoID) => {
     const targetPhoto = photos.find(photo => photo.id === photoID);
 
     favouritePhotos.find(photo => photo.id === photoID) ? setFavouritePhotos(favouritePhotos.filter(photo => photo.id !== photoID)) : setFavouritePhotos(prev => [...prev, targetPhoto]);
   }
 
   return (
-    <FavouritePhotosContext.Provider value={{favouritePhotos, addFavourite}}>
+    <FavouritePhotosContext.Provider value={{favouritePhotos, toggleFavourite}}>
       <ShowModalContext.Provider value={{setShowModal, setModalData, modalData}}>
         <div className="App">
-          <HomeRoute photos={photos} topics={topics}  />
+          <HomeRoute photos={photos} topics={topics} />
           {showModal && <PhotoDetailsModal />}
         </div>
       </ShowModalContext.Provider>

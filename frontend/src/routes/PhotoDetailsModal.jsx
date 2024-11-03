@@ -19,36 +19,40 @@ const PhotoDetailsModal = () => {
   const similarPhotosArr = Object.values(similar_photos);
 
   return (
-    <div className="photo-details-modal">
-      <button
-        className="photo-details-modal__close-button"
-        onClick={() => setShowModal(false)}
-      >
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
-      <div className="photo-details-modal__images">
-        <PhotoFavButton photoId={id} />
-        <img
-          src={regular}
-          alt="full-sized image"
-          className="photo-details-modal__image"
-        />
-        <div className="photo-details-modal__photographer-details">
-          <img
-            src={profile}
-            alt="user profile"
-            className="photo-details-modal__photographer-profile"
-          />
-          <div className="">
-            {username}
-            <div className="photo-details-modal__photographer-location">
-              {city}, {country}
+    <div className="photo-details-modal" onClick={() => setShowModal(false)}>
+      <div className="photo-details-modal__content">
+        <button
+          className="photo-details-modal__close-button"
+          onClick={() => setShowModal(false)}
+        >
+          <img src={closeSymbol} alt="close symbol" />
+        </button>
+        <div className="photo-details-modal__image-details">          
+            <PhotoFavButton photoId={id} />
+            <img
+              src={regular}
+              alt="full-sized image"
+              className="photo-details-modal__image"
+            />
+          
+          <div className="photo-details-modal__photographer-details">
+            <img
+              src={profile}
+              alt="user profile"
+              className="photo-details-modal__photographer-profile"
+            />
+            <div>
+              <span>{username}</span>
+              <div className="photo-details-modal__photographer-location">
+                {city}, {country}
+              </div>
             </div>
           </div>
-        </div>
-        <h4 className="photo-details-modal__header">Similar Photos</h4>
-        <div className="photo-details-modal__images">
-          <PhotoList photos={similarPhotosArr} />
+          <hr />
+          <h4 className="photo-details-modal__header">Similar Photos</h4>
+          <div className="photo-details-modal__images">
+            <PhotoList photos={similarPhotosArr} />
+          </div>
         </div>
       </div>
     </div>

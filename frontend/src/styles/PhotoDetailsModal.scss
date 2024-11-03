@@ -1,10 +1,18 @@
 .photo-details-modal {
+  background-color: rgba(0,0,0,.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-details-modal__content {
   background-color: white;
-  box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -40%);
+  position: fixed;
   height: 80%;
   width: 55%;
   overflow-y: scroll;
@@ -25,13 +33,27 @@
 }
 
 .photo-details-modal__images {
-  margin-left: 36px;
-  margin-top: 8px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.photo-details-modal__image-details {
+  padding: 16px 32px;
+  height: inherit;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .photo-details-modal__image {
-  max-width: 95%;
+  /* max-width: 95%; */
+  width: 100%;
+  height: auto;
+  max-height: 100%;
   border-radius: 8px;
+  object-fit: contain;
+  background-color: #dfdfdf;
 }
 
 .photo-details-modal__top-bar {
@@ -46,6 +68,7 @@
 .photo-details-modal__photographer-details {
   display: flex;
   font-size: 16px;
+  margin-top: 16px;
 }
 
 .photo-details-modal__header {
@@ -69,9 +92,38 @@
   height: 40px;
 }
 
+hr {
+  border: 1px solid #eaeaea;
+  margin: 16px 0;
+}
 .photo-details-modal__photographer-info {
   margin-top: 5px;
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
+}
+
+
+/* scroll bar styles */
+/* width */
+.photo-details-modal__content::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.photo-details-modal__content::-webkit-scrollbar-track {
+  background: #eaeaea;
+  margin: 8px;
+  border-radius: 16px;
+}
+
+/* Handle */
+.photo-details-modal__content::-webkit-scrollbar-thumb {
+  background: #ababab;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+.photo-details-modal__content::-webkit-scrollbar-thumb:hover {
+  background: #797979;
 }
