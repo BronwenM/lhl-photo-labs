@@ -26,28 +26,30 @@ const PhotoDetailsModal = () => {
       >
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <PhotoFavButton photoId={id} />
-      <img
-        src={regular}
-        alt="full-sized image"
-        className="photo-details-modal__image"
-      />
-      <div className="photo-details-modal__photographer-details">
+      <div className="photo-details-modal__images">
+        <PhotoFavButton photoId={id} />
         <img
-          src={profile}
-          alt="user profile"
-          className="photo-details-modal__photographer-profile"
+          src={regular}
+          alt="full-sized image"
+          className="photo-details-modal__image"
         />
-        <div className="">
-          {username}
-          <div className="photo-details-modal__photographer-location">
-            {city}, {country}
+        <div className="photo-details-modal__photographer-details">
+          <img
+            src={profile}
+            alt="user profile"
+            className="photo-details-modal__photographer-profile"
+          />
+          <div className="">
+            {username}
+            <div className="photo-details-modal__photographer-location">
+              {city}, {country}
+            </div>
           </div>
         </div>
-      </div>
-      <h4 className="photo-details-modal__header">Similar Photos</h4>
-      <div className="photo-details-modal__images">
-        <PhotoList photos={similarPhotosArr} />
+        <h4 className="photo-details-modal__header">Similar Photos</h4>
+        <div className="photo-details-modal__images">
+          <PhotoList photos={similarPhotosArr} />
+        </div>
       </div>
     </div>
   );

@@ -4,20 +4,16 @@ import '../styles/PhotoFavButton.scss';
 import { FavouritePhotosContext } from 'App';
 
 function PhotoFavButton(props) {
-  const [favouritePhoto, setFavouritePhoto] = useState(false);
-
-  const {addFavourite} = useContext(FavouritePhotosContext);
-  // console.log(addFavourite);
+  const {addFavourite, favouritePhotos} = useContext(FavouritePhotosContext);
 
   const handleClick = () => {
     addFavourite(props.photoId);
-    setFavouritePhoto(prev => !prev)
   }
 
   return (
     <div className="photo-list__fav-icon" onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={favouritePhoto}/>
+        <FavIcon selected={favouritePhotos.filter(photo => photo.id === props.photoId).length > 0 ? true : false}/>
       </div>
     </div>
   );
