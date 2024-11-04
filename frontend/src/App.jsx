@@ -4,11 +4,13 @@ import HomeRoute from "routes/HomeRoute";
 import { createContext } from "react";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import useApplicationData from "hooks/useApplicationData";
+import photos from "mocks/photos";
+import topics from "mocks/topics";
 export const FavouritePhotosContext = createContext();
 export const ShowModalContext = createContext();
 
 const App = () => {
-  const {photos, topics, favouritePhotos, showModal, modalData, toggleFavourite, toggleModal, loadModalData} = useApplicationData();
+  const {favouritePhotos, showModal, modalData, toggleFavourite, toggleModal, loadModalData} = useApplicationData(photos, topics);
     
   return (
     <FavouritePhotosContext.Provider value={{favouritePhotos, toggleFavourite}}>

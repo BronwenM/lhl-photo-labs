@@ -1,27 +1,58 @@
-import { useState } from "react"
-import photos from "mocks/photos";
-import topics from "mocks/topics";
+import { useState, useReducer } from "react"
 
-const useApplicationData = () => {
-  const [favouritePhotos, setFavouritePhotos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState({});
+export const ACTIONS = {
+  TOGGLE_FAV_PHOTO: 'TOGGLE_FAV_PHOTO',
+  TOGGLE_MODAL_VIEW: 'TOGGLE_MODAL_VIEW',
+  SET_MODAL_DATA: 'SET_MODAL_DATA'
+}
+
+const initialState = {
+  favouritePhotos: [],
+  showModal: false,
+  modalData: {}
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'TOGGLE_FAV_PHOTO':
+      const targetPhoto = action.photos.find(photo => photo.id === action.photoID);
+      console.log('[...state.favouritePhotos, targetPhoto]', [...state.favouritePhotos, targetPhoto])
+      return {
+        ...state,
+        favouritePhotos: state.favouritePhotos.find(photo => photo.id === action.photoID) ? state.favouritePhotos.filter(photo => photo.id !== action.photoID) : [...state.favouritePhotos, targetPhoto]
+      }
+
+    case 'TOGGLE_MODAL_VIEW':
+      return {...state, showModal: !state.showModal}
+
+    case 'SET_MODAL_DATA':
+      return {
+        ...state,
+        modalData: { ...action.photoObj }
+      }
+
+    default:
+      throw new Error(`ERROR! BAD ACTION ${action.type}`);
+  }
+}
+
+const useApplicationData = (photos, topics) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleFavourite = (photoID) => {
-    const targetPhoto = photos.find(photo => photo.id === photoID);
-
-    favouritePhotos.find(photo => photo.id === photoID) ? setFavouritePhotos(favouritePhotos.filter(photo => photo.id !== photoID)) : setFavouritePhotos(prev => [...prev, targetPhoto]);
+    dispatch({type: 'TOGGLE_FAV_PHOTO', photoID, photos})
+    console.log('state.favouritePhotos', state.favouritePhotos)
   }
 
   const toggleModal = () => {
-    setShowModal(prev => !prev)
+    dispatch({type: 'TOGGLE_MODAL_VIEW'})
   }
 
   const loadModalData = (photoObj) => {
-    setModalData({ ...photoObj });
+    dispatch({type: 'SET_MODAL_DATA', photoObj})
   }
 
-  return {photos, topics, favouritePhotos, showModal, modalData, toggleFavourite, toggleModal, loadModalData}
+  return { favouritePhotos: state.favouritePhotos, showModal: state.showModal, modalData: state.modalData, toggleFavourite, toggleModal, loadModalData }
 }
 
 export default useApplicationData;

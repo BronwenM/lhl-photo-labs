@@ -18,10 +18,7 @@ const PhotoListItem = (props) => {
       <PhotoFavButton photoId={id} />
       <div style={{cursor: "pointer"}}
         onClick={() => {
-          /* setShowModal((prev) => !prev);
-          setModalData({ ...props.photo }); */
           toggleModal();
-          console.log(props.photo);
           loadModalData(props.photo)
         }}
       >
