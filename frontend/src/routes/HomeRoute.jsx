@@ -4,11 +4,11 @@ import PhotoList from '../components/PhotoList';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
-  const {topics, photos} = props;
+  const {topics, photos, setTopicID} = props;
 
   return (
     <div className="home-route">
-      <TopNavigation topics={topics}/>
+      <TopNavigation topics={topics} setTopicID={setTopicID}/>
       <PhotoList photos={photos} />
     </div>
   );

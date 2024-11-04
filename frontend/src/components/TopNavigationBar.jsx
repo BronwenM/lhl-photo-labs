@@ -7,11 +7,12 @@ import { FavouritePhotosContext } from 'App';
 
 const TopNavigation = (props) => {
   const {favouritePhotos} = useContext(FavouritePhotosContext);
+  const {setTopicID} = props;
 
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
-      <TopicList topics={props.topics} />
+      <span className="top-nav-bar__logo" onClick={() => setTopicID(null)}>PhotoLabs</span>
+      <TopicList topics={props.topics} setTopicID={setTopicID} />
       <FavBadge isFavPhotoExist={favouritePhotos.length > 0 && true}/>
     </div>
   )

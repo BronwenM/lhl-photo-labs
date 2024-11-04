@@ -10,25 +10,40 @@ export const FavouritePhotosContext = createContext();
 export const ShowModalContext = createContext();
 
 const App = () => {
-  const {photoData, topicData, favouritePhotos, showModal, modalData, toggleFavourite, toggleModal, loadModalData, loadPhotosData, loadTopicData} = useApplicationData();
+  const { 
+    photoData,
+    topicData,
+    currentTopicID,
+    favouritePhotos,
+    showModal,
+    modalData,
+    toggleFavourite,
+    toggleModal,
+    loadModalData,
+    loadAllPhotosData,
+    loadTopicData,
+    setTopicID
+  } = useApplicationData();
   
   useEffect(() => {
-    fetch('/api/photos')
+    console.log('Fetching Data From DB:', currentTopicID ? `/api/topics/photos/${currentTopicID}` : '/api/photos')
+  
+    fetch(currentTopicID ? `/api/topics/photos/${currentTopicID}` : '/api/photos')
     .then(res => res.json())
-    .then(data => loadPhotosData(data));
+    .then(data => loadAllPhotosData(data));
     
     fetch('/api/topics')
     .then(res => res.json())
     .then(data => loadTopicData(data));
     
-  }, [])
+  }, [currentTopicID])
   
     
   return (
     <FavouritePhotosContext.Provider value={{favouritePhotos, toggleFavourite}}>
       <ShowModalContext.Provider value={{toggleModal, loadModalData, modalData}}>
         <div className="App">
-          <HomeRoute photos={photoData} topics={topicData} />
+          <HomeRoute photos={photoData} topics={topicData} setTopicID={setTopicID} />
           {showModal && <PhotoDetailsModal />}
         </div>
       </ShowModalContext.Provider>

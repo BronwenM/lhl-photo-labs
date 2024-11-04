@@ -9,6 +9,9 @@
   box-shadow: 0 4px 6px -6px #222;
   height: 72px;
   background-color: #fff;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .top-nav-bar__logo {
@@ -17,5 +20,6 @@
   font-size: 24px;
   color: #111;
   text-underline-position: auto;
-  // margin-left: 24px;
+  cursor: pointer;
+  
 }
