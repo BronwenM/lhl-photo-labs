@@ -40,7 +40,7 @@ const App = () => {
   
     
   return (
-    <PhotosContext.Provider value={{favouritePhotos, toggleFavourite, setTopicID}}>
+    <PhotosContext.Provider value={{favouritePhotos, toggleFavourite, setTopicID, currentTopicID}}>
       <ShowModalContext.Provider value={{toggleModal, loadModalData, modalData}}>
         <div className="App">
           <HomeRoute photos={photoData} topics={topicData} />
