@@ -3,11 +3,10 @@ import '../styles/TopNavigationBar.scss'
 import TopicList from './TopicList';
 import FavBadge from './FavBadge';
 import { useContext } from 'react';
-import { FavouritePhotosContext } from 'App';
+import { PhotosContext } from 'App';
 
 const TopNavigation = (props) => {
-  const {favouritePhotos} = useContext(FavouritePhotosContext);
-  const {setTopicID} = props;
+  const {favouritePhotos, setTopicID} = useContext(PhotosContext);
 
   return (
     <div className="top-nav-bar">

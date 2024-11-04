@@ -4,11 +4,11 @@ import TopicListItem from "./TopicListItem";
 import useApplicationData from "hooks/useApplicationData";
 
 const TopicList = (props) => {
-  const { topics, setTopicID } = props;  
+  const { topics } = props;  
   return (
     <div className="top-nav-bar__topic-list">
       {topics.map(topic => 
-        <TopicListItem key={topic.id} topic={topic} setTopicID={setTopicID}/>
+        <TopicListItem key={topic.id} topic={topic} />
       )}
     </div>
   );

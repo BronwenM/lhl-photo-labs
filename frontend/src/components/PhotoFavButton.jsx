@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
-import { FavouritePhotosContext } from 'App';
+import { PhotosContext } from 'App';
 
 function PhotoFavButton(props) {
-  const {toggleFavourite, favouritePhotos} = useContext(FavouritePhotosContext);
+  const {toggleFavourite, favouritePhotos} = useContext(PhotosContext);
 
   const handleClick = () => {
     toggleFavourite(props.photoId);
