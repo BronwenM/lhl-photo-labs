@@ -6,7 +6,7 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = () => {
-  const { setShowModal, modalData } = useContext(ShowModalContext);
+  const { toggleModal, modalData } = useContext(ShowModalContext);
 
   const {
     id,
@@ -19,22 +19,23 @@ const PhotoDetailsModal = () => {
   const similarPhotosArr = Object.values(similar_photos);
 
   return (
-    <div className="photo-details-modal" onClick={() => setShowModal(false)}>
+    <div>
+      <div className="photo-details-modal" onClick={toggleModal}></div>
       <div className="photo-details-modal__content">
         <button
           className="photo-details-modal__close-button"
-          onClick={() => setShowModal(false)}
+          onClick={toggleModal}
         >
           <img src={closeSymbol} alt="close symbol" />
         </button>
-        <div className="photo-details-modal__image-details">          
-            <PhotoFavButton photoId={id} />
-            <img
-              src={regular}
-              alt="full-sized image"
-              className="photo-details-modal__image"
-            />
-          
+        <div className="photo-details-modal__image-details">
+          <PhotoFavButton photoId={id} />
+          <img
+            src={regular}
+            alt="full-sized image"
+            className="photo-details-modal__image"
+          />
+
           <div className="photo-details-modal__photographer-details">
             <img
               src={profile}

@@ -1,27 +1,18 @@
 import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
-import photos from "mocks/photos";
-import topics from "mocks/topics";
-import { useState, createContext } from "react";
+import { createContext } from "react";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
+import useApplicationData from "hooks/useApplicationData";
 export const FavouritePhotosContext = createContext();
 export const ShowModalContext = createContext();
 
 const App = () => {
-  const [favouritePhotos, setFavouritePhotos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState({});
-
-  const toggleFavourite = (photoID) => {
-    const targetPhoto = photos.find(photo => photo.id === photoID);
-
-    favouritePhotos.find(photo => photo.id === photoID) ? setFavouritePhotos(favouritePhotos.filter(photo => photo.id !== photoID)) : setFavouritePhotos(prev => [...prev, targetPhoto]);
-  }
-
+  const {photos, topics, favouritePhotos, showModal, modalData, toggleFavourite, toggleModal, loadModalData} = useApplicationData();
+    
   return (
     <FavouritePhotosContext.Provider value={{favouritePhotos, toggleFavourite}}>
-      <ShowModalContext.Provider value={{setShowModal, setModalData, modalData}}>
+      <ShowModalContext.Provider value={{toggleModal, loadModalData, modalData}}>
         <div className="App">
           <HomeRoute photos={photos} topics={topics} />
           {showModal && <PhotoDetailsModal />}
