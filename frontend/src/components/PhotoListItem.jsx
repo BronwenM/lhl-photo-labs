@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
-import { ShowModalContext } from "App";
+import { PhotosContext, ShowModalContext } from "App";
 
 const PhotoListItem = (props) => {
   const {
@@ -11,15 +11,21 @@ const PhotoListItem = (props) => {
     user: { username, name, profile },
   } = props.photo;
 
-  const { toggleModal, loadModalData } = useContext(ShowModalContext);
+  const { toggleModal, loadModalData, showModal } = useContext(ShowModalContext);
+  const { photoData} = useContext(PhotosContext);
 
   return (
     <div className="photo-list__item">
       <PhotoFavButton photoId={id} />
       <div style={{cursor: "pointer"}}
         onClick={() => {
-          toggleModal();
-          loadModalData(props.photo)
+          if(!showModal) {
+            toggleModal();
+            loadModalData(props.photo);
+          } else {
+            const newModalData = photoData.find(photo => photo.id === id)
+            loadModalData(newModalData);
+          }
         }}
       >
         <img src={regular} alt="image" className="photo-list__image" />

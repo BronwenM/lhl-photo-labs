@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useReducer } from "react";
 
 export const ACTIONS = {
   TOGGLE_FAV_PHOTO: 'TOGGLE_FAV_PHOTO',
@@ -7,7 +7,8 @@ export const ACTIONS = {
   LOAD_ALL_PHOTO_DATA: 'LOAD_ALL_PHOTO_DATA',
   LOAD_TOPIC_DATA: 'LOAD_TOPIC_DATA',
   SET_PHOTOS_TOPIC: 'SET_PHOTOS_TOPIC',
-}
+  FIND_PHOTO_DATA: 'FIND_PHOTO_DATA',
+};
 
 const initialState = {
   favouritePhotos: [],
@@ -15,8 +16,9 @@ const initialState = {
   modalData: {},
   photoData: [],
   topicData: [],
-  currentTopicID: null
-}
+  currentTopicID: null,
+  singlePhotoData: {}
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,35 +27,42 @@ const reducer = (state, action) => {
       return {
         ...state,
         favouritePhotos: state.favouritePhotos.find(photo => photo.id === action.photoID) ? state.favouritePhotos.filter(photo => photo.id !== action.photoID) : [...state.favouritePhotos, targetPhoto]
-      }
+      };
 
     case 'TOGGLE_MODAL_VIEW':
-      return { ...state, showModal: !state.showModal }
+      return { ...state, showModal: !state.showModal };
 
     case 'SET_MODAL_DATA':
       return {
         ...state,
         modalData: { ...action.photoObj }
-      }
+      };
 
     case 'LOAD_ALL_PHOTO_DATA':
       return {
         ...state,
         photoData: [...action.data]
-      }
+      };
 
     case 'LOAD_TOPIC_DATA':
       return {
         ...state,
         topicData: [...action.data]
-      }
+      };
 
     case 'SET_PHOTOS_TOPIC': 
-      return { ...state, currentTopicID: action.topicID }
+      return { ...state, currentTopicID: action.topicID };
+
+    case 'FIND_PHOTO_DATA':
+      return {
+        ...state,
+        singlePhotoData: action.photoData.find(photo => photo.id === action.photoID)
+      };
+
 
     default:
       throw new Error(`ERROR! BAD ACTION ${action.type}`);
-  }
+  };
 }
 
 const useApplicationData = () => {
@@ -76,15 +85,19 @@ const useApplicationData = () => {
   }
 
   const loadTopicData = (data) => {
-    dispatch({ type: 'LOAD_TOPIC_DATA', data })
+    dispatch({ type: 'LOAD_TOPIC_DATA', data });
   }
 
   const loadPhotosByTopic = (data) => {
-    dispatch({ type: 'GET_PHOTOS_BY_TOPICS', data })
+    dispatch({ type: 'GET_PHOTOS_BY_TOPICS', data });
   }
 
   const setTopicID = (topicID) => {
     dispatch({type: 'SET_PHOTOS_TOPIC', topicID});
+  }
+
+  const findPhotoByID = (photoID) => {
+    dispatch({type: 'FIND_PHOTO_DATA', photoData: state.photoData, photoID})
   }
 
   return {
@@ -94,14 +107,16 @@ const useApplicationData = () => {
     favouritePhotos: state.favouritePhotos,
     showModal: state.showModal,
     modalData: state.modalData,
+    singlePhotoData: state.singlePhotoData,
     toggleFavourite,
     toggleModal,
     loadModalData,
     loadAllPhotosData,
     loadTopicData,
     loadPhotosByTopic,
-    setTopicID
-  }
+    setTopicID,
+    findPhotoByID
+  };
 }
 
 export default useApplicationData;
