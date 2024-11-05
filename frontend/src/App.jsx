@@ -22,6 +22,7 @@ const App = () => {
     loadAllPhotosData,
     loadTopicData,
     setTopicID,
+    showFavouritePhotos
   } = useApplicationData();
   
   useEffect(() => {
@@ -38,7 +39,7 @@ const App = () => {
   
     
   return (
-    <PhotosContext.Provider value={{favouritePhotos, toggleFavourite, setTopicID, currentTopicID, photoData}}>
+    <PhotosContext.Provider value={{favouritePhotos, toggleFavourite, setTopicID, currentTopicID, photoData, showFavouritePhotos}}>
       <ShowModalContext.Provider value={{toggleModal, loadModalData, modalData, showModal}}>
         <div className="App">
           <HomeRoute photos={photoData} topics={topicData} />

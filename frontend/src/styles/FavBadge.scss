@@ -2,6 +2,13 @@
   position: relative;
   width: 32px;
   height: 32px;
+  cursor: pointer;
+  border-radius: 64px;
+  padding: 10px 8px 8px 10px;
+  
+  &:hover {
+    background-color: #d4401c57;
+  }
 }
 
 .fav-badge__count {

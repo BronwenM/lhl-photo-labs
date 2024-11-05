@@ -8,6 +8,7 @@ export const ACTIONS = {
   LOAD_TOPIC_DATA: 'LOAD_TOPIC_DATA',
   SET_PHOTOS_TOPIC: 'SET_PHOTOS_TOPIC',
   FIND_PHOTO_DATA: 'FIND_PHOTO_DATA',
+  SHOW_FAV_PHOTOS: 'SHOW_FAV_PHOTOS',
 };
 
 const initialState = {
@@ -59,6 +60,11 @@ const reducer = (state, action) => {
         singlePhotoData: action.photoData.find(photo => photo.id === action.photoID)
       };
 
+    case 'SHOW_FAV_PHOTOS':
+      return {
+        ...state,
+        photoData: [...state.favouritePhotos]
+      };
 
     default:
       throw new Error(`ERROR! BAD ACTION ${action.type}`);
@@ -97,7 +103,11 @@ const useApplicationData = () => {
   }
 
   const findPhotoByID = (photoID) => {
-    dispatch({type: 'FIND_PHOTO_DATA', photoData: state.photoData, photoID})
+    dispatch({type: 'FIND_PHOTO_DATA', photoData: state.photoData, photoID});
+  }
+
+  const showFavouritePhotos = () => {
+    dispatch({type: 'SHOW_FAV_PHOTOS'});
   }
 
   return {
@@ -115,7 +125,8 @@ const useApplicationData = () => {
     loadTopicData,
     loadPhotosByTopic,
     setTopicID,
-    findPhotoByID
+    findPhotoByID,
+    showFavouritePhotos
   };
 }
 
